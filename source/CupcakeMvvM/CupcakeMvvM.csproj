@@ -53,9 +53,11 @@
     <Compile Include="Extensions\ExtensionMethods.cs" />
     <Compile Include="Extensions\PortableReflectionExtensions.cs" />
     <Compile Include="Framework\BindableCollection.cs" />
+    <Compile Include="Framework\BindingEx.cs" />
     <Compile Include="Framework\INotifyPropertyChangedEx.cs" />
     <Compile Include="Framework\IObservableCollection.cs" />
     <Compile Include="Framework\PropertyChangedBase.cs" />
+    <Compile Include="Framework\ViewModelBase.cs" />
     <Compile Include="IEventAggregator.cs" />
     <Compile Include="IHandle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
