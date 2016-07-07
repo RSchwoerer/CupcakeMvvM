@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Markup;
 
@@ -29,6 +30,10 @@ namespace CupcakeMvvM
         /// </summary>
         public static void RegisterDataTemplate(Type viewModelType, Type viewType)
         {
+
+            if (viewModelType == null || viewType == null)
+                return;
+
             var template = CreateTemplate(viewModelType, viewType);
             var key = template.DataTemplateKey;
             if (key == null)
@@ -38,6 +43,9 @@ namespace CupcakeMvvM
 
         private static DataTemplate CreateTemplate(Type viewModelType, Type viewType)
         {
+            Debug.Assert(viewModelType?.Namespace != null, "viewModelType?.Namespace != null");
+            Debug.Assert(viewType?.Namespace != null, "viewType?.Namespace != null");
+
             if (viewModelType?.Namespace == null)
                 throw new ArgumentNullException(nameof(viewModelType));
             if (viewType?.Namespace == null)
