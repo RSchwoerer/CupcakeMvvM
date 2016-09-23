@@ -2,6 +2,7 @@
 {
     public class ViewModelBase : PropertyChangedBase
     {
+        protected static IEventAggregator Event;
         private string _DisplayName;
 
         /// <summary>

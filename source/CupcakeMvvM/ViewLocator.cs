@@ -73,7 +73,8 @@ namespace CupcakeMvvM
             (typeName, context) =>
             {
                 // HACK [rs]: simple hack to locate view name.
-                var nameList = new List<string> { typeName.Replace("ViewModel", "View") };
+                var nameList = new List<string> { typeName.Replace("ViewModel", "View"), typeName + "View" };
+                nameList.RemoveAll(n => n == typeName); // remove anthing matching original name.
                 return nameList;
 
                 // TODO [rs]: the rest of this method hooks up the fancy rules based transforming......

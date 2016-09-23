@@ -33,6 +33,8 @@ namespace CupcakeMvvM
 
             if (viewModelType == null || viewType == null)
                 return;
+            if (viewModelType == viewType)
+                return;
 
             var template = CreateTemplate(viewModelType, viewType);
             var key = template.DataTemplateKey;

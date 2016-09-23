@@ -18,6 +18,16 @@ namespace CupcakeMvvM
 
         private readonly List<Handler> handlers = new List<Handler>();
 
+        static EventAggregator()
+        {
+            Instance = new EventAggregator();
+        }
+
+        private EventAggregator()
+        { }
+
+        public static EventAggregator Instance { get; } = null;
+
         /// <summary>
         /// Searches the subscribed handlers to check if we have a handler for
         /// the message type supplied.
