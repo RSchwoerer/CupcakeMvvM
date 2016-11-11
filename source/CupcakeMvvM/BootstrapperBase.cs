@@ -16,8 +16,7 @@ namespace CupcakeMvvM
         /// Creates an instance of the bootstrapper.
         /// </summary>
         protected BootstrapperBase()
-        {
-        }
+        { }
 
         /// <summary>
         /// The application.
@@ -172,7 +171,7 @@ namespace CupcakeMvvM
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="e">The event args.</param>
-        protected virtual void OnUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e) { }
+        protected virtual void OnUnhandledException(object sender, Exception e) { }
 
         /// <summary>
         /// Provides an opportunity to hook into the application object.
@@ -180,8 +179,11 @@ namespace CupcakeMvvM
         protected virtual void PrepareApplication()
         {
             Application.Startup += OnStartup;
-            Application.DispatcherUnhandledException += OnUnhandledException;
+            Application.DispatcherUnhandledException += ApplicationOnDispatcherUnhandledException;
             Application.Exit += OnExit;
+
+            AppDomain currentDomain = AppDomain.CurrentDomain;
+            currentDomain.UnhandledException += CurrentDomainOnUnhandledException;
         }
 
         /// <summary>
@@ -226,6 +228,9 @@ namespace CupcakeMvvM
         /// </summary>
         protected virtual void StartRuntime()
         {
+            Application = Application.Current;
+            PrepareApplication();
+
             // TODO [rs]: add EventAggregator support.
             //EventAggregator.HandlerResultProcessing = (target, result) =>
             //{
@@ -248,9 +253,20 @@ namespace CupcakeMvvM
 
             AssemblySource.Initialize(SelectAssemblies());
 
-            Application = Application.Current;
-            PrepareApplication();
             Configure();
+        }
+
+        private void ApplicationOnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            Exception ex = e.Exception;
+            OnUnhandledException(sender, ex);
+        }
+
+        private void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            // should be safe to cast e.ExceptionObject to Exception (http://stackoverflow.com/q/913472/504398)
+            Exception ex = (Exception)e.ExceptionObject;
+            OnUnhandledException(sender, ex);
         }
     }
 }

@@ -44,10 +44,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblySource.cs" />
+    <Compile Include="AwaitableDelegateCommand.cs" />
     <Compile Include="Behaviors\FocusBehavior.cs" />
     <Compile Include="Behaviors\RegisterAppShortcutKeysBehavior.cs" />
     <Compile Include="BootstrapperBase.cs" />
     <Compile Include="DataTemplateFactory.cs" />
+    <Compile Include="DelegateCommand.cs" />
     <Compile Include="EventAggregator.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\EventAggregatorExtensions.cs" />
@@ -56,6 +58,7 @@
     <Compile Include="Extensions\PortableReflectionExtensions.cs" />
     <Compile Include="Framework\BindableCollection.cs" />
     <Compile Include="Framework\BindingEx.cs" />
+    <Compile Include="Framework\IAsyncCommand.cs" />
     <Compile Include="Framework\INotifyPropertyChangedEx.cs" />
     <Compile Include="Framework\IObservableCollection.cs" />
     <Compile Include="Framework\PropertyChangedBase.cs" />
