@@ -22,7 +22,6 @@ namespace CupcakeMvvM.Framework
 
         private void Configure()
         {
-            // ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True
             UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
             NotifyOnValidationError = true;
             ValidatesOnDataErrors = true;

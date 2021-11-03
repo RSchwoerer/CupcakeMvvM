@@ -19,6 +19,29 @@ namespace CupcakeMvvM.Framework
     /// source: Josh Smith (https://joshsmithonwpf.wordpress.com/2009/07/11/one-way-to-avoid-messy-propertychanged-event-handling/
     ///
     /// </remarks>
+    /// <example>
+    ///
+    ///    public class NumberChangeLogViewModel
+    ///    {
+    ///        PropertyObserver<NumberViewModel> _observer;
+    ///    
+    ///        public NumberChangeLogViewModel()
+    ///        {
+    ///            this.Number = new NumberViewModel();
+    ///            this.ChangeLog = new ObservableCollection<string>();
+    ///    
+    ///            _observer =
+    ///                new PropertyObserver<NumberViewModel>(this.Number)
+    ///                   .RegisterHandler(n => n.Value, n => Log("Value: " + n.Value))
+    ///                   .RegisterHandler(n => n.IsNegative, this.AppendIsNegative)
+    ///                   .RegisterHandler(n => n.IsEven, this.AppendIsEven);
+    ///        }
+    ///        
+    ///        // ....
+    ///        
+    ///    }
+    /// 
+    /// </example>
     public class PropertyObserver<TPropertySource> : IWeakEventListener
         where TPropertySource : INotifyPropertyChanged
     {

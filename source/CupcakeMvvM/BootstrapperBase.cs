@@ -23,6 +23,8 @@ namespace CupcakeMvvM
         /// </summary>
         protected System.Windows.Application Application { get; set; }
 
+        protected Window RootWindow { get; private set; }
+
         /// <summary>
         /// Initialize the framework.
         /// </summary>
@@ -89,7 +91,8 @@ namespace CupcakeMvvM
 
         protected void DisplayRootViewFor(object viewModel)
         {
-            CreateWindow(viewModel, false, null, null).Show();
+            RootWindow = CreateWindow(viewModel, false, null, null);
+            RootWindow.Show();
         }
 
         /// <summary>
@@ -264,7 +267,7 @@ namespace CupcakeMvvM
 
         private void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            // should be safe to cast e.ExceptionObject to Exception (http://stackoverflow.com/q/913472/504398)
+            // should be safe to cast e.ExceptionObject to Exception (http://stackoverflow.com/q/913472)
             Exception ex = (Exception)e.ExceptionObject;
             OnUnhandledException(sender, ex);
         }

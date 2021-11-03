@@ -168,28 +168,35 @@ namespace CupcakeMvvM.Framework
             }
         }
 
+        private object addRangeLock = new object();
+
         /// <summary>
         /// Adds the range.
         /// </summary>
         /// <param name = "items">The items.</param>
         public virtual void AddRange(IEnumerable<T> items)
         {
-            Execute.OnUIThread(() =>
+            lock (addRangeLock)
             {
-                var previousNotificationSetting = IsNotifying;
-                IsNotifying = false;
-                var index = Count;
-                foreach (var item in items)
-                {
-                    InsertItemBase(index, item);
-                    index++;
-                }
-                IsNotifying = previousNotificationSetting;
 
-                OnPropertyChanged(new PropertyChangedEventArgs("Count"));
-                OnPropertyChanged(new PropertyChangedEventArgs("Item[]"));
-                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-            });
+
+                Execute.OnUIThread(() =>
+                {
+                    var previousNotificationSetting = IsNotifying;
+                    IsNotifying = false;
+                    var index = Count;
+                    foreach (var item in items)
+                    {
+                        InsertItemBase(index, item);
+                        index++;
+                    }
+                    IsNotifying = previousNotificationSetting;
+
+                    OnPropertyChanged(new PropertyChangedEventArgs("Count"));
+                    OnPropertyChanged(new PropertyChangedEventArgs("Item[]"));
+                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+                });
+            }
         }
 
         /// <summary>

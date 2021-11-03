@@ -42,7 +42,7 @@ namespace CupcakeMvvM.Framework
     /// Implements an ObservableCollection that provides item changed notifications
     /// </summary>
     /// <remarks>
-    /// source: http://stackoverflow.com/a/32013610/504398
+    /// source: http://stackoverflow.com/a/32013610
     /// </remarks>
     public class ObservableCollectionEx<T> : ObservableCollection<T>
           where T : INotifyPropertyChanged
@@ -111,14 +111,16 @@ namespace CupcakeMvvM.Framework
                   e.Action == NotifyCollectionChangedAction.Replace)
             {
                 foreach (T item in e.OldItems)
-                    item.PropertyChanged -= ChildPropertyChanged;
+                    if (item != null)
+                        item.PropertyChanged -= ChildPropertyChanged;
             }
 
             if (e.Action == NotifyCollectionChangedAction.Add ||
                 e.Action == NotifyCollectionChangedAction.Replace)
             {
                 foreach (T item in e.NewItems)
-                    item.PropertyChanged += ChildPropertyChanged;
+                    if (item != null)
+                        item.PropertyChanged += ChildPropertyChanged;
             }
 
             base.OnCollectionChanged(e);
@@ -131,8 +133,11 @@ namespace CupcakeMvvM.Framework
             // fire specialized event
             ItemPropertyChanged?.Invoke(this, e);
 
+            // [rs] : This was causing the selection in `ObjectTreeView` to change to a changed item's parent,
+            //        any time the item was changed.
+            //        Cannot find why this was ever added, maybe as a replacement for 'ForceReset'?
             // fire generic event
-             base.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            // base.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
         protected void OnItemPropertyChanged(int index, PropertyChangedEventArgs e)

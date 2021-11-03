@@ -23,6 +23,7 @@
     <DocumentationFile>
     </DocumentationFile>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -49,6 +50,7 @@
     <Compile Include="AssemblySource.cs" />
     <Compile Include="AwaitableDelegateCommand.cs" />
     <Compile Include="Behaviors\FocusBehavior.cs" />
+    <Compile Include="Behaviors\ActivateWindowBehavior.cs" />
     <Compile Include="Behaviors\RegisterAppShortcutKeysBehavior.cs" />
     <Compile Include="BootstrapperBase.cs" />
     <Compile Include="CommandBehavior.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="Extensions\PortableReflectionExtensions.cs" />
     <Compile Include="Framework\BindableCollection.cs" />
     <Compile Include="Framework\BindingEx.cs" />
+    <Compile Include="Framework\EventToCommand.cs" />
     <Compile Include="Framework\IAsyncCommand.cs" />
     <Compile Include="Framework\INotifyPropertyChangedEx.cs" />
     <Compile Include="Framework\IObservableCollection.cs" />

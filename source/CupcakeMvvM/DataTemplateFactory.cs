@@ -78,12 +78,8 @@ namespace CupcakeMvvM
 
         private static string DataTemplateXaml(string modelNamespace, string modelTypeName, string viewNamespace, string viewTypeName)
         {
-            const string xamlTemplate = "<DataTemplate DataType=\"{{x:Type {0}:{1}}}\"><{2}:{3} /></DataTemplate>";
-            return string.Format(xamlTemplate,
-                NamespaceCache[modelNamespace],
-                modelTypeName,
-                NamespaceCache[viewNamespace],
-                viewTypeName);
+            return
+                $"<DataTemplate DataType=\"{{x:Type {NamespaceCache[modelNamespace]}:{modelTypeName}}}\"><{NamespaceCache[viewNamespace]}:{viewTypeName} /></DataTemplate>";
         }
     }
 }
