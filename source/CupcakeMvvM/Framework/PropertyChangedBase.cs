@@ -3,6 +3,7 @@ using CupcakeMvvM.Support;
 using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
+using System.Windows.Input;
 
 namespace CupcakeMvvM.Framework
 {
@@ -53,6 +54,10 @@ namespace CupcakeMvvM.Framework
             if (IsNotifying && PropertyChanged != null)
             {
                 Execute.OnUIThread(() => OnPropertyChanged(new PropertyChangedEventArgs(propertyName)));
+
+                // this is here specifically for updating the CanExecute status for ICommands.
+                // might be a bit of a HACK putting it here, but... ¯\_(ツ)_/¯
+                Execute.OnUIThread(CommandManager.InvalidateRequerySuggested);
             }
         }
 

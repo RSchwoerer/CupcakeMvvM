@@ -92,8 +92,7 @@ namespace CupcakeMvvM
         /// <param name="execute">The execution logic.</param>
         public RelayCommand(Action execute)
             : this(execute, null)
-        {
-        }
+        { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RelayCommand"/> class.
@@ -128,8 +127,6 @@ namespace CupcakeMvvM
         /// <summary>
         /// True if method can execute
         /// </summary>
-        /// <param name="parameter"></param>
-        /// <returns></returns>
         [DebuggerStepThrough]
         public bool CanExecute(object parameter)
         {
@@ -139,7 +136,6 @@ namespace CupcakeMvvM
         /// <summary>
         /// Execute method of a command
         /// </summary>
-        /// <param name="parameter"></param>
         public void Execute(object parameter)
         {
             _Execute();

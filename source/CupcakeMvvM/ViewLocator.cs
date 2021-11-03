@@ -37,7 +37,7 @@ namespace CupcakeMvvM
 
                 if (viewType == null)
                 {
-                    Console.WriteLine("View not found. Searched: {0}.", string.Join(", ", viewTypeList.ToArray()));
+                    Console.WriteLine($"View not found for {viewTypeName}. Searched: {string.Join(", ", viewTypeList.ToArray())}.");
                 }
 
                 return viewType;

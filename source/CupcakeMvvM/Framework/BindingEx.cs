@@ -2,7 +2,10 @@
 
 namespace CupcakeMvvM.Framework
 {
-
+    /// <summary>
+    /// A customized binding which sets some sensible defaults.
+    /// (NotifyOnValidationErrors, ValidatesOnDataErrors, ValidatesOnExceptions = true)
+    /// </summary>
     public class BindingEx : Binding
     {
         public BindingEx()

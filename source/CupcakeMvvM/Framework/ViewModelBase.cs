@@ -1,5 +1,8 @@
 ﻿namespace CupcakeMvvM.Framework
 {
+    /// <summary>
+    /// Base class for all view model objects.
+    /// </summary>
     public class ViewModelBase : PropertyChangedBase
     {
         protected static IEventAggregator Event;
